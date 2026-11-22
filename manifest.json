@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.drakahari.drakops",
+  "name": "DrakOps",
+  "version": "0.1.0",
+  "description": "Open the installed DrakOps app from the Omarchy bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "defaultSection": "right",
+    "displayName": "DrakOps",
+    "allowMultiple": false
+  },
+  "license": "MIT",
+  "author": "drakahari"
+}
