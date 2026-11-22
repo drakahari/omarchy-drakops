@@ -6,13 +6,19 @@ Item {
   id: root
 
   property bool available: false
+  property url appIcon: ""
   readonly property string label: available ? "Open DrakOps" : "DrakOps is not installed"
 
   implicitWidth: 30
   implicitHeight: 26
 
   function refreshAvailability() {
-    available = !!DesktopEntries.byId("drakops")
+    const entry = DesktopEntries.byId("drakops")
+    available = !!entry
+    const icon = entry ? entry.icon : ""
+    appIcon = !icon ? "" : icon[0] === "/"
+      ? "file://" + icon.split("/").map(encodeURIComponent).join("/")
+      : /^[A-Za-z0-9_.-]+$/.test(icon) ? Quickshell.iconPath(icon, true) : ""
   }
 
   Component.onCompleted: refreshAvailability()
@@ -28,7 +34,22 @@ Item {
       entry.execute()
   }
 
+  Image {
+    id: installedIcon
+    objectName: "drakopsInstalledIcon"
+    anchors.centerIn: parent
+    width: 22
+    height: 22
+    source: root.appIcon
+    sourceSize.width: 64
+    sourceSize.height: 64
+    fillMode: Image.PreserveAspectFit
+    visible: status === Image.Ready
+  }
+
   Rectangle {
+    objectName: "drakopsFallbackIcon"
+    visible: !installedIcon.visible
     anchors.centerIn: parent
     width: 24
     height: 20
@@ -38,6 +59,7 @@ Item {
 
     Text {
       anchors.centerIn: parent
+      textFormat: Text.PlainText
       text: ">_"
       color: "#F8F0FF"
       font.pixelSize: 12

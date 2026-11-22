@@ -1,6 +1,6 @@
 # DrakOps for Omarchy
 
-A small Omarchy Quattro bar widget. Click the purple terminal icon to open DrakOps. It does not show devices or start an SSH session.
+A small Omarchy Quattro bar widget. Click the installed DrakOps icon to open the app. If the desktop entry has no usable icon, the widget shows a purple `>_` mark instead. Hover to see whether DrakOps is available. The widget does not show devices or start an SSH session.
 
 ## Requirements
 
@@ -15,6 +15,8 @@ omarchy plugin enable io.github.drakahari.drakops --section right
 ```
 
 If asked to enable immediately, choose No to inspect the code first. Run the second command when ready.
+
+If the old icon is still shown after updating the plugin, restart the Omarchy bar with `omarchy restart bar`. This is not needed for normal installation.
 
 ## Remove
 
